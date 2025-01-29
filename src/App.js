@@ -44,8 +44,8 @@ export function Calculator() {
     const [savingsInterestRate, setSavingsInterestRate] = useState(0);
 
     return (
-      <div className={classes.mainContainer}>
-
+      <div className={classes.mainContainer}> {/* Remove This Div */}
+      
         <div className={classes.calculatorContainer}>
             <div className={classes.calculatorContainerLeft}>
                 <div className={classes.leftHeader}>
@@ -75,7 +75,7 @@ export function Calculator() {
                 : <SavingsCalculator interestRate={savingsInterestRate} setInterestRate={setSavingsInterestRate} />}
 
         </div>
-      </div>
+      {/* Remove This Div */} </div> 
 
     );
 }
