@@ -1,0 +1,303 @@
+/* remove */
+.mainContainer {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1400px;
+    height: 100vh;
+    /* background-color: #5AB790; */
+    margin-top: 5rem;
+}
+/* ------------ */
+
+.calculator {
+    margin: 0;
+    padding: 0;
+    -webkit-box-shadow: 10px 10px 23px -10px rgba(0,0,0,0.24);
+    -moz-box-shadow: 10px 10px 23px -10px rgba(0,0,0,0.24);
+    box-shadow: 10px 10px 23px -10px rgba(0,0,0,0.24);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+.calculatorContainer {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: flex-start;
+    gap: 2rem;
+    width: 100%;
+}
+.calculatorContent {
+    display: flex;
+}
+.leftHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.leftHeader h2 {
+    margin: 0;
+}
+
+@media(max-width: 1175px) {
+    .calculatorContainer {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Form */
+.calculatorForm {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background: #F5F9FB;
+    padding: 2rem;
+    width: 100%;
+
+    -webkit-border-top-left-radius: 20px;
+    -webkit-border-bottom-left-radius: 20px;
+    -moz-border-radius-topleft: 20px;
+    -moz-border-radius-bottomleft: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+.inputGroup .doubleInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.inputGroup input, .inputGroup select {
+    border: none;
+    background: #fff;
+    border-radius: 10px;
+    padding: .75rem;
+}
+
+/* Resuts */
+.calculatorRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2rem;
+    width: 100%;
+}
+.calculatorRight h2 {
+    margin: 0;
+}
+.initialDeposit {
+    color: #134576;
+}
+.additionalContributions {
+    color: #7384A7;
+}
+.interestEarned {
+    color: #5AB790;
+}
+
+
+/* Bar */
+.barContainer {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    background-color: #e3e3e3;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+.barPrincipal {
+    background-color: #052036;/* Principal */
+    height: 100%;
+    transition: width .3s;
+}
+.barInterest {
+    background-color: #134576; /* Interest */
+    margin-left: .25rem;
+    height: 100%;
+    transition: width .3s;
+}
+.barInitial {
+    background-color: #134576; /* Initial Savings */
+    height: 100%;
+    transition: width 0.3s ease;
+}
+.barContributions {
+    background-color: #7384A7; /* Contributions */
+    margin-left: .25rem;
+    height: 100%;
+    transition: width 0.3s ease;
+}
+.barAPY {
+    background-color: #5AB790; /* APY */
+    margin-left: .25rem;
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+/* Breakdown */
+.breakdownCostsLoans {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+.breakdownCostsSavings {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem 0;
+}
+.costGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;;
+}
+.costGroup h4, .costGroup p {
+    margin: 0 !important;
+}
+
+@media(max-width: 700px) {
+    .calculatorContent {
+        flex-direction: column;
+    }
+    .calculatorForm, .calculatorRight {
+        width: auto;
+    }
+}
+@media(max-width: 500px) {
+    .breakdownCostsLoans {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* Button Toggle */
+.toggleContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 200px; 
+    height: 45px; 
+    background-color: #ffffff; 
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.toggleBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    transition: all 0.3s ease-in-out;
+}
+
+.toggleSlider {
+    width: 50%;
+    height: 100%;
+    background-color: #004476; 
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.loanActive .toggleSlider {
+    transform: translateX(0%);
+}
+
+.savingsActive .toggleSlider {
+    transform: translateX(100%);
+}
+
+.toggleButton {
+    flex: 1;
+    border: none;
+    background: none;
+    color: #666;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+.toggleButton.active {
+    color: #ffffff; /* White text for active state */
+}
+
+
+/* Accordion */
+.loanSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.accordion {
+    background: #f9f9f9;
+    padding: 10px;
+}
+.accordionItem {
+    -webkit-box-shadow: 10px 10px 23px -10px rgba(0,0,0,0.24);
+    -moz-box-shadow: 10px 10px 23px -10px rgba(0,0,0,0.24);
+    box-shadow: 10px 10px 23px -10px rgba(0,0,0,0.24);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.accordionHeader {
+    font-weight: bold;
+    padding: 15px;
+    cursor: pointer;
+    transition: .5s all;
+}
+
+.accordionHeader.open {
+    background: #1e3a8a;
+    color: white;
+    -webkit-border-top-left-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-topright: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.accordionContent {
+    max-height: 0; 
+    overflow: hidden;
+    transition: .3s all;
+}
+.accordionContent.expanded {
+    max-height: 200px; 
+}
+.accordionContent.collapsed {
+    max-height: 0;
+}
+.accordionSubitem {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+    transition: .3s all;
+}
+.accordionSubitem p {
+    margin: 0;
+    padding: 10px;
+}
+.accordionSubitem:hover {
+    background: #e2e8f0;
+}
+.accordionSubitem.active {
+    color: #1e3a8a;
+    font-weight: bold;
+}
