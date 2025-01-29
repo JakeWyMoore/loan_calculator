@@ -69,6 +69,29 @@
     width: 100%;
     gap: .5rem;
 }
+.inputContainer {
+    position: relative;
+}
+
+.inputField {
+    width: 100%;
+    padding-right: 20px; /* Make space for the % */
+    padding-left: 5px;
+    height: 30px; /* Adjust height as needed */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.inputSuffix {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Prevent user from interacting with % */
+    color: #666;
+    font-size: 18px;
+}
 .inputGroup .doubleInput {
     display: flex;
     align-items: center;

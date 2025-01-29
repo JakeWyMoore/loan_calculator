@@ -205,7 +205,10 @@ function LoanCalculator({ interestRate, setInterestRate }) {
                   </div>
                   <div className={classes.inputGroup}>
                       <label>Interest Rate (%)</label>
-                      <input type="number" value={interestRate} onChange={(e) => setInterestRate(parseFloat(e.target.value) || 0)} />
+                      <div className={classes.inputContainer}>
+                        <input className={classes.inputField} type="number" value={interestRate} onChange={(e) => setInterestRate(parseFloat(e.target.value) || 0)} />
+                        <span className={classes.inputSuffix}>%</span>
+                    </div>
                   </div>
               </div>
 
