@@ -142,87 +142,99 @@ function SavingsTypes({ setInterestRate }) {
     );
 }
 
-// Loan Calculator Component
 function LoanCalculator({ interestRate, setInterestRate }) {
-    const [loanAmount, setLoanAmount] = useState(0);
-    const [paymentSchedule, setPaymentSchedule] = useState('Monthly');
-    const [term, setTerm] = useState(1); // in years
+  const [loanAmount, setLoanAmount] = useState(0);
+  const [paymentSchedule, setPaymentSchedule] = useState('Monthly');
+  const [years, setYears] = useState(1);
+  const [months, setMonths] = useState(0);
 
-    // Helpers
-    const periodsPerYear = { Monthly: 12, Quarterly: 4, Annually: 1 };
-    const paymentPeriods = periodsPerYear[paymentSchedule] || 1;
-    const periodicInterestRate = interestRate / 100 / paymentPeriods;
-    const totalPayments = term * paymentPeriods;
+  // Helpers
+  const periodsPerYear = { Monthly: 12, Quarterly: 4, Annually: 1 };
+  const paymentPeriods = periodsPerYear[paymentSchedule] || 1;
+  const periodicInterestRate = interestRate / 100 / paymentPeriods;
+  
+  // Convert total term into years (e.g., 2 years 6 months = 2.5 years)
+  const totalYears = years + months / 12;
+  const totalPayments = totalYears * paymentPeriods;
 
-    // Calculate Monthly Payment
-    const calculateMonthlyPayment = () => {
-        if (periodicInterestRate === 0) return loanAmount / totalPayments;
-        return (loanAmount * periodicInterestRate) / (1 - Math.pow(1 + periodicInterestRate, -totalPayments));
-    };
+  // Calculate Monthly Payment
+  const calculateMonthlyPayment = () => {
+      if (periodicInterestRate === 0) return loanAmount / totalPayments;
+      return (loanAmount * periodicInterestRate) / (1 - Math.pow(1 + periodicInterestRate, -totalPayments));
+  };
 
-    const monthlyPayment = calculateMonthlyPayment();
-    const totalPayment = monthlyPayment * totalPayments;
-    const totalInterest = totalPayment - loanAmount;
+  const monthlyPayment = calculateMonthlyPayment();
+  const totalPayment = monthlyPayment * totalPayments;
+  const totalInterest = totalPayment - loanAmount;
 
-    // Calculate Monthly Interest (First Payment)
-    const monthlyInterest = loanAmount * periodicInterestRate;
-    const principalPercentage = (loanAmount / totalPayment) * 100 || 0;
-    const interestPercentage = (totalInterest / totalPayment) * 100 || 0;
+  // Calculate Monthly Interest (First Payment)
+  const monthlyInterest = loanAmount * periodicInterestRate;
+  const principalPercentage = (loanAmount / totalPayment) * 100 || 0;
+  const interestPercentage = (totalInterest / totalPayment) * 100 || 0;
 
-    return (
-        <div className={classes.calculator}>
-            <div className={classes.calculatorContent}>                
+  return (
+      <div className={classes.calculator}>
+          <div className={classes.calculatorContent}>                
 
-                {/* Right Side - Loan Form */}
-                <div className={classes.calculatorForm}>
-                    <div className={classes.inputGroup}>
-                        <label>Loan Amount</label>
-                        <input type="number" value={loanAmount} onChange={(e) => setLoanAmount(parseFloat(e.target.value) || 0)} />
-                    </div>
-                    <div className={classes.inputGroup}>
-                        <label>Payment Schedule</label>
-                        <select value={paymentSchedule} onChange={(e) => setPaymentSchedule(e.target.value)}>
-                            <option value="Monthly">Monthly</option>
-                            <option value="Quarterly">Quarterly</option>
-                            <option value="Annually">Annually</option>
-                        </select>
-                    </div>
-                    <div className={classes.inputGroup}>
-                        <label>Loan Term (Years)</label>
-                        <input type="number" value={term} onChange={(e) => setTerm(parseInt(e.target.value) || 1)} />
-                    </div>
-                    <div className={classes.inputGroup}>
-                        <label>Interest Rate (%)</label>
-                        <input type="number" value={interestRate} onChange={(e) => setInterestRate(parseFloat(e.target.value) || 0)} />
-                    </div>
-                </div>
-
-                {/* Results and Bar */}
-                <div className={classes.calculatorRight}>
-                    <p>Viewing as {paymentSchedule} Payments</p>
-                    <h2>${loanAmount.toFixed(2)}</h2>
-                    <div className={classes.barContainer}>
-                        <div className={classes.barPrincipal} style={{ width: `${principalPercentage}%` }}></div>
-                        <div className={classes.barInterest} style={{ width: `${interestPercentage}%` }}></div>
-                    </div>
-
-                    <div className={classes.breakdownCostsLoans}>
-                        <div className={classes.costGroup}>
-                            <p><strong>{principalPercentage.toFixed(0)}% Principal</strong></p>
-                            <p>{monthlyPayment.toFixed(2)} /mo</p>
-                            <p>${loanAmount.toFixed(2)} total</p>
+              {/* Right Side - Loan Form */}
+              <div className={classes.calculatorForm}>
+                  <div className={classes.inputGroup}>
+                      <label>Loan Amount</label>
+                      <input type="number" value={loanAmount} onChange={(e) => setLoanAmount(parseFloat(e.target.value) || 0)} />
+                  </div>
+                  <div className={classes.inputGroup}>
+                      <label>Payment Schedule</label>
+                      <select value={paymentSchedule} onChange={(e) => setPaymentSchedule(e.target.value)}>
+                          <option value="Monthly">Monthly</option>
+                          <option value="Quarterly">Quarterly</option>
+                          <option value="Annually">Annually</option>
+                      </select>
+                  </div>
+                  <div className={classes.inputGroup}>
+                      <label>Loan Term</label>
+                      <div className={classes.doubleInput}>
+                        <div className={classes.inputGroup}>
+                          <label>Years</label>
+                          <input type="number" min="0" value={years} onChange={(e) => setYears(parseInt(e.target.value) || 0)} placeholder="Years" />
                         </div>
-                        <div className={classes.costGroup}>
-                            <p><strong>{interestPercentage.toFixed(0)}% Interest</strong></p>
-                            <p>{monthlyInterest.toFixed(2)} /mo</p>
-                            <p>${totalInterest.toFixed(2)} total</p>
+                        <div className={classes.inputGroup}>
+                          <label>Months</label>
+                          <input type="number" min="0" max="11" value={months} onChange={(e) => setMonths(parseInt(e.target.value) || 0)} placeholder="Months" />
                         </div>
-                    </div>
-                </div>
+                      </div>
+                  </div>
+                  <div className={classes.inputGroup}>
+                      <label>Interest Rate (%)</label>
+                      <input type="number" value={interestRate} onChange={(e) => setInterestRate(parseFloat(e.target.value) || 0)} />
+                  </div>
+              </div>
 
-            </div>
-        </div>
-    );
+              {/* Results and Bar */}
+              <div className={classes.calculatorRight}>
+                  <p>Viewing as {paymentSchedule} Payments</p>
+                  <h2>${loanAmount.toFixed(2)}</h2>
+                  <div className={classes.barContainer}>
+                      <div className={classes.barPrincipal} style={{ width: `${principalPercentage}%` }}></div>
+                      <div className={classes.barInterest} style={{ width: `${interestPercentage}%` }}></div>
+                  </div>
+
+                  <div className={classes.breakdownCostsLoans}>
+                      <div className={classes.costGroup}>
+                          <p><strong>{principalPercentage.toFixed(0)}% Principal</strong></p>
+                          <p>{monthlyPayment.toFixed(2)} /mo</p>
+                          <p>${loanAmount.toFixed(2)} total</p>
+                      </div>
+                      <div className={classes.costGroup}>
+                          <p><strong>{interestPercentage.toFixed(0)}% Interest</strong></p>
+                          <p>{monthlyInterest.toFixed(2)} /mo</p>
+                          <p>${totalInterest.toFixed(2)} total</p>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+  );
 }
 
 // Savings Calculator Component

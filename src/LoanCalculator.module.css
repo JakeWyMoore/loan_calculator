@@ -66,6 +66,7 @@
 .inputGroup {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: .5rem;
 }
 .inputGroup .doubleInput {
@@ -74,12 +75,19 @@
     justify-content: center;
     gap: 2rem;
 }
+.inputGroup .doubleInput input {
+    flex: 1;
+}
 
 .inputGroup input, .inputGroup select {
     border: none;
     background: #fff;
     border-radius: 10px;
     padding: .75rem;
+
+    -webkit-box-shadow: 10px 10px 23px -10px rgba(0,0,0,0.24);
+    -moz-box-shadow: 10px 10px 23px -10px rgba(0,0,0,0.24);
+    box-shadow: 10px 10px 23px -10px rgba(0,0,0,0.24);
 }
 
 /* Resuts */
