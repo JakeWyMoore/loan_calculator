@@ -204,7 +204,7 @@ function LoanCalculator({ interestRate, setInterestRate }) {
                       </div>
                   </div>
                   <div className={classes.inputGroup}>
-                      <label>Interest Rate (%)</label>
+                      <label>Interest Rate</label>
                       <div className={classes.inputContainer}>
                         <input className={classes.inputField} type="number" value={interestRate} onChange={(e) => setInterestRate(parseFloat(e.target.value) || 0)} />
                         <span className={classes.inputSuffix}>%</span>
@@ -279,47 +279,51 @@ function SavingsCalculator({ interestRate, setInterestRate }) {
 
                 {/* Form */}
                 <div className={classes.calculatorForm}>
-                    <div className={classes.inputGroup}>
-                        <label>Initial Savings</label>
-                        <input type="number" value={initialSavings} onChange={(e) => setInitialSavings(parseFloat(e.target.value) || 0)} />
+                  <div className={classes.inputGroup}>
+                    <label>Initial Savings</label>
+                    <input type="number" value={initialSavings} onChange={(e) => setInitialSavings(parseFloat(e.target.value) || 0)} />
+                  </div>
+                  <div className={classes.inputGroup}>
+                    <label>Monthly Contribution</label>
+                    <input type="number" value={monthlyContribution} onChange={(e) => setMonthlyContribution(parseFloat(e.target.value) || 0)} />
+                  </div>
+                  <div className={classes.inputGroup}>
+                    <label>Term (Years)</label>
+                    <input type="number" value={term} onChange={(e) => setTerm(parseInt(e.target.value) || 1)} />
+                  </div>
+                  <div className={classes.inputGroup}>
+                    <label>APY</label>
+                    <div className={classes.inputContainer}>
+                      <input className={classes.inputField} type="number" value={interestRate} onChange={(e) => setInterestRate(parseInt(e.target.value) || 0)} />                    
+                      <span className={classes.inputSuffix}>%</span>
                     </div>
-                    <div className={classes.inputGroup}>
-                        <label>Monthly Contribution</label>
-                        <input type="number" value={monthlyContribution} onChange={(e) => setMonthlyContribution(parseFloat(e.target.value) || 0)} />
-                    </div>
-                    <div className={classes.inputGroup}>
-                        <label>Term (Years)</label>
-                        <input type="number" value={term} onChange={(e) => setTerm(parseInt(e.target.value) || 1)} />
-                    </div>
-                    <div className={classes.inputGroup}>
-                        <label>APY (%)</label>
-                        <input type="number" value={interestRate} onChange={(e) => setInterestRate(parseInt(e.target.value) || 0)} />                    </div>
+                  </div>
                 </div>
 
                 {/* Results and Bar */}
                 <div className={classes.calculatorRight}>
-                    <p>Viewing as Total Earnings</p>
-                    <h2>${totalSaved.toFixed(2)}</h2>
-                    <div className={classes.barContainer}>
-                        <div className={classes.barInitial} style={{ width: `${initialSavingsPercentage}%` }} ></div>
-                        <div className={classes.barContributions} style={{ width: `${contributionPercentage}%` }}></div>
-                        <div className={classes.barAPY} style={{ width: `${interestPercentage}%` }}></div>
-                    </div>
+                  <p>Viewing as Total Earnings</p>
+                  <h2>${totalSaved.toFixed(2)}</h2>
+                  <div className={classes.barContainer}>
+                    <div className={classes.barInitial} style={{ width: `${initialSavingsPercentage}%` }} ></div>
+                    <div className={classes.barContributions} style={{ width: `${contributionPercentage}%` }}></div>
+                    <div className={classes.barAPY} style={{ width: `${interestPercentage}%` }}></div>
+                  </div>
 
-                    <div className={classes.breakdownCostsSavings}>
-                        <div className={classes.costGroup}>
-                            <h4 className={classes.initialDeposit}>Initial Deposit:</h4>
-                            <p>${initialSavings.toFixed(2)}</p>
-                        </div>
-                        <div className={classes.costGroup}>
-                            <h4 className={classes.additionalContributions}>Additional Contributions:</h4>
-                            <p>${totalContributions.toFixed(2)}</p>
-                        </div>
-                        <div className={classes.costGroup}>
-                            <h4 className={classes.interestEarned}>Interest Earned:</h4>
-                            <p>${totalInterest.toFixed(2)}</p> 
-                        </div>
+                  <div className={classes.breakdownCostsSavings}>
+                    <div className={classes.costGroup}>
+                      <h4 className={classes.initialDeposit}>Initial Deposit:</h4>
+                      <p>${initialSavings.toFixed(2)}</p>
                     </div>
+                    <div className={classes.costGroup}>
+                      <h4 className={classes.additionalContributions}>Additional Contributions:</h4>
+                      <p>${totalContributions.toFixed(2)}</p>
+                    </div>
+                    <div className={classes.costGroup}>
+                      <h4 className={classes.interestEarned}>Interest Earned:</h4>
+                      <p>${totalInterest.toFixed(2)}</p> 
+                    </div>
+                  </div>
                 </div>
             </div>
         </div>
