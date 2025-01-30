@@ -18,6 +18,21 @@ const loanProducts = [
             { name: "VA Loans", rate: 3.2 },
         ],
     },
+    {
+        category: "Auto Loans",
+        subItems: [
+            { name: "New Car Loan", rate: 5.2 },
+            { name: "Used Car Loan", rate: 6.0 },
+        ],
+    },
+    {
+        category: "Home Loans",
+        subItems: [
+            { name: "Conventional Loans", rate: 4.5 },
+            { name: "FHA Loans", rate: 3.8 },
+            { name: "VA Loans", rate: 3.2 },
+        ],
+    },
 ];
 
 const savingsProducts = [
